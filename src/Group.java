@@ -1,10 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Group{
     private Student headman;
     private List<Student> students = new ArrayList<>();
     private List<String> tasks = new ArrayList<>();
+    private final Map<String, List<Student>> mapOfStudentsCompletedTasks = new HashMap<>();
 
     Group(Student studentHeadman){
         this.headman = studentHeadman;
@@ -13,6 +16,11 @@ public class Group{
 
     public void addStudent(Student student){
         students.add(student);
+    }
+    public void addTaskCompleted(String task, Student student) {
+        List<Student> studentsCompletedTask = this.mapOfStudentsCompletedTasks.get(task);
+        studentsCompletedTask.add(student);
+
     }
 
     public void removeStudent(Student student){
@@ -33,6 +41,7 @@ public class Group{
     }
     public void addTask(String task){
         tasks.add(task);
+        mapOfStudentsCompletedTasks.put(task, new ArrayList<>());
     }
 
     public Student getHeadman() {
@@ -58,5 +67,4 @@ public class Group{
     public void setTasks(List<String> tasks) {
         this.tasks = tasks;
     }
-
 }
